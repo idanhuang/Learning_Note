@@ -1,5 +1,14 @@
 # Shallow Copy and Deep Copy
 
+## Introduction
+In object-oriented programming, object copying is creating a copy of an existing object. There are two main methods of copying: Shallow Copy and Deep Copy.
+
+## Shallow Copy
+Shallow copy is a field by field copy. If the field value is primitive type, then it copy the value. If the field value is reference type, then it copies the reference (i.e., source and newly created object share the same memeory). 
+
+## Deep Copy
+Deep Copy is a process of creating a new object and then copying the fields of the source object to the newly created object. If the field is value type, then it copy the value. If the field is reference type, then the newly created object will have different memory.
+
 ## Example
 ```C#
 using System;
@@ -62,15 +71,12 @@ public class CopyTest
 }
 ```
 ## Shallow Copy Output
-Orignal Data:
+Orignal Data:</br>
 ct1: 1, 1, str1</br>
 ct2: 1, 1, str1</br>
 Updated Data:</br>
 ct1: 2, 4, str2</br>
 ct2: 1, 4, str2</br>
-
-</br></br>
-
 
 ## Deep Copy Output
 Orignal Data:</br>
