@@ -1,6 +1,6 @@
 # Shallow Copy and Deep Copy
-## Shallow Copy
-### Example
+
+## Example
 ```C#
 using System;
 
@@ -13,99 +13,69 @@ public class StringClass
         strVal = str;
     }
 }
+
 public class CopyTest
 {
-    public int intVal { get; set; }
-    public int[] intArr { get; set; }
+    public int intVal { get; set; }  // primitive type
+    public int[] intArr { get; set; } // reference type
+    public StringClass strClass { get; set; } // reference type
 
-    public StringClass strClass { get; set; }
-
-    public CopyTest(int val, int[] arr, StringClass strclass)
+    public CopyTest ShallowCopy(CopyTest copyTest)
     {
-        intVal = val;
-        intArr = arr;
-        strClass = strclass;
+        return (CopyTest)copyTest.MemberwiseClone();
+    }
+
+    public CopyTest DeepCopy(CopyTest copyTest)
+    {
+        CopyTest cp = (CopyTest)copyTest.MemberwiseClone();
+        cp.strClass = new StringClass(copyTest.strClass.strVal);
+        cp.intArr = new int[copyTest.intArr.Length];
+        for (int i = 0; i < copyTest.intArr.Length; i++)
+            cp.intArr[i] = copyTest.intArr[i];
+        return cp;
     }
 
     public static void Main(string[] args)
     {
-        CopyTest ct1 = new CopyTest(1, new int[] { 1, 2, 3, 4 }, new StringClass("str1"));
-        // CopyTest ct2 = ct1; // Assignment operator will do a shallow copy
-        CopyTest ct2 = (CopyTest)ct1.MemberwiseClone();
+        CopyTest ct1 = new CopyTest();
+        ct1.intVal = 1;
+        ct1.intArr = new int[] { 1, 2, 3 };
+        ct1.strClass = new StringClass("str1");
+
+        // Shallow Copy
+        CopyTest ct2 = ct1.DeepCopy(ct1);
+
+        // Deep Copy
+        // CopyTest ct2 = ct1.DeepCopy(ct1);
+        
         Console.WriteLine("Orignal Data:");
         Console.WriteLine("ct1: " + ct1.intVal + ", " + ct1.intArr[0] + ", " + ct1.strClass.strVal);
         Console.WriteLine("ct2: " + ct2.intVal + ", " + ct2.intArr[0] + ", " + ct2.strClass.strVal);
 
         ct1.intVal = 2;
-        ct1.intArr[0] = 3; // new int[]{ 5,6,7,8,9 };
-        ct1.strClass.strVal = "newStr";
+        ct1.intArr[0] = 4;
+        ct1.strClass.strVal = "str2";
         Console.WriteLine("Updated Data:");
         Console.WriteLine("ct1: " + ct1.intVal + ", " + ct1.intArr[0] + ", " + ct1.strClass.strVal);
         Console.WriteLine("ct2: " + ct2.intVal + ", " + ct2.intArr[0] + ", " + ct2.strClass.strVal);
     }
 }
 ```
-### Output
-Orignal Data:</br>
+## Shallow Copy Output
+Orignal Data:
 ct1: 1, 1, str1</br>
 ct2: 1, 1, str1</br>
 Updated Data:</br>
-ct1: 2, 3, newStr</br>
-ct2: 1, 3, newStr</br>
+ct1: 2, 4, str2</br>
+ct2: 1, 4, str2</br>
 
 </br></br>
 
-## Deep Copy
-### Example
-```C#
-using System;
 
-public class StringClass
-{
-    public string strVal;
-
-    public StringClass(string str)
-    {
-        strVal = str;
-    }
-}
-public class CopyTest
-{
-    public int intVal { get; set; }
-    public int[] intArr { get; set; }
-    public StringClass strClass { get; set; }
-
-    public CopyTest(int val, int[] arr, StringClass strclass)
-    {
-        intVal = val;
-        intArr = arr;
-        strClass = strclass;
-    }
-
-    public static void Main(string[] args)
-    {
-        CopyTest ct1 = new CopyTest(1, new int[] { 1, 2, 3, 4 }, new StringClass("str1"));
-        int[] arr2 = new int[ct1.intArr.Length];
-        Array.Copy(ct1.intArr, arr2, ct1.intArr.Length);
-        CopyTest ct2 = new CopyTest(ct1.intVal, arr2 , new StringClass(ct1.strClass.strVal));
-        Console.WriteLine("Orignal Data:");
-        Console.WriteLine("ct1: " + ct1.intVal + ", " + ct1.intArr[0] + ", " + ct1.strClass.strVal);
-        Console.WriteLine("ct2: " + ct2.intVal + ", " + ct2.intArr[0] + ", " + ct2.strClass.strVal);
-
-        ct1.intVal = 2;
-        ct1.intArr[0] = 3; // new int[]{ 5,6,7,8,9 };
-        ct1.strClass.strVal = "newStr";
-        Console.WriteLine("Updated Data:");
-        Console.WriteLine("ct1: " + ct1.intVal + ", " + ct1.intArr[0] + ", " + ct1.strClass.strVal);
-        Console.WriteLine("ct2: " + ct2.intVal + ", " + ct2.intArr[0] + ", " + ct2.strClass.strVal);
-    }
-}
-```
-
-### Output
+## Deep Copy Output
 Orignal Data:</br>
 ct1: 1, 1, str1</br>
 ct2: 1, 1, str1</br>
 Updated Data:</br>
-ct1: 2, 3, newStr</br>
+ct1: 2, 4, str2</br>
 ct2: 1, 1, str1</br>
