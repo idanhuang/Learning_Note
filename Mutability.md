@@ -1,12 +1,10 @@
 ## Mutability And Immutability
-An immutable object is an object whose state cannot be modified after it's created.This is in contrast to a mutable object, which have methods to change the value of the object.
-
-```String``` is an example of immutable object, while ```StringBuilder``` is a mutable object that has method to change its value.
+An immutable object is an object whose state cannot be modified after it's created. This is in contrast to a mutable object, which has methods to change the value of the object. ```String``` is an immutable object, while ```StringBuilder``` is a mutable object.
 
 ```C#
 string str = "hello";
 str[0] = 'H'; // compile error. string[int] is read-only.
-string str1 = str.ToUpper(); // str1 = "HELLO", str = "hello"
+string str1 = str.ToUpper(); // str1 = "HELLO", str = "hello". Value of str doesn't change.
 ```
 
 ```C#
@@ -18,12 +16,8 @@ sb.Replace('o', 'O'); // wOrld
 sb.Insert(0, "hello");// hellowOrld
 ```
 
-## Concatenate strings with String and StringBuilder
-```String``` is an immutable object. To add something to the end of a ```String```, program will create a new String object, and then point the reference to the new object. While ```StringBuilder``` is a mutable object. When adding something to the end of a ```StringBuilder```, reference will point at the same object.
-
-Using immutable object ```String``` to concatenate strings will create a lot of temporary copies. Suppose we concatenate n strings, then the first the string will be copied n times, the second string will be copied n - 1 times, and so on. So it will take O(N^2) to concatenate n strings. ```StringBuilder``` uses an internal data structure which helps minimize the copying. So when concatenating a large number of strings, it's better to use ```StringBuilder```.
-
-![](https://github.com/idanhuang/Learning_Note/blob/main/img/concatenate_strings.PNG)
+## Concatenate strings using String and StringBuilder
+```String``` is an immutable object. To add something to the end of a ```String```, program will create a new String object, and then point the reference to the new object. ```StringBuilder``` is a mutable object. When adding something to the end of a ```StringBuilder```, reference will point at the same object and the value of the object will change.
 
 ```C#
 // concatenate strings by using String
@@ -35,8 +29,12 @@ StringBuilder sb = new StringBuilder("a");
 sb.Append("b");
 ```
 
+![](https://github.com/idanhuang/Learning_Note/blob/main/img/concatenate_strings.PNG)
+
+Using immutable object ```String``` to concatenate strings will create a lot of temporary copies. Suppose we concatenate n strings, then the first the string will be copied n times, the second string will be copied n - 1 times, and so on. So it will take O(N^2) to concatenate N strings. ```StringBuilder``` uses an internal data structure which helps minimize the copying. So when concatenating a large number of strings, it's better to use ```StringBuilder```.
+
 ## A little further about StringBuilder
-```StringBuilder``` is essentially implemented like a variable-length array. A ```StringBuilder``` starts with 16-character capacity (i.e., StringBuilder can hold up to 16 character by default), once the current capacity is used up it will automatically increase. Appending a character at the end of a string takes O(1), while appending a string has O(N) time complexity.
+```StringBuilder``` is essentially implemented like a variable-length array. A ```StringBuilder``` starts with 16-character capacity (i.e., StringBuilder can hold up to 16 character by default), the capacity will automatically increase once it is used up. Appending a character at the end of a string takes O(1), and appending a N-length string has O(N) time complexity.
 
 
 
