@@ -23,6 +23,8 @@ sb.Insert(0, "hello");// hellowOrld
 
 Using immutable object ```String``` to concatenate strings will create a lot of temporary copies. Suppose we concatenate n strings, then the first the string will be copied n times, the second string will be copied n - 1 times, and so on. So it will take O(N^2) to concatenate n strings. ```StringBuilder``` uses an internal data structure which helps minimize the copying. So when concatenating a large number of strings, it's better to use ```StringBuilder```.
 
+![](https://github.com/idanhuang/Learning_Note/blob/main/img/concatenate_strings.PNG)
+
 ```C#
 // concatenate strings by using String
 string str = "a";
