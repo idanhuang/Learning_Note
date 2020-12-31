@@ -3,8 +3,21 @@
 ## Introduction
 In object-oriented programming, object copying is creating a copy of an existing object. The result object is called object copy or simply copy. There are two main copy methods: Shallow Copy and Deep Copy.
 
+## Value type and Reference type
+A variable of a value type contains an instance of the type. In C# value types include
+- simple types: bool, byte, char, decimal, double, float, int, long, sbyte, short, uint, ulong, ushort
+- enum types
+- structure type
+- nullable value type
+
+Unlike the value-type variables, a reference-type variable doesn't store the values directly. Instead, it stores an address where the value is stored. In other words, a refernce-type variable contains a pointer to another memory location that holds the data. In C#, reference types include
+- String
+- Array (even if its element are value types)
+- Class
+- Delegate
+
 ## Shallow Copy
-Shallow copy is a field by field copy. If the field value is a primitive type, then shallow copy copies the value. If the field value is a reference type, then shallow copy copies the reference, i.e., source and copy share the same memeory. 
+Shallow copy is a field by field copy. If the field is value type, then shallow copy copies the value. If the field is reference type, then shallow copy copies the reference instead of copying the object that the reference points to. So the original object and copied object are not 100% disjoint, which means any changes made to the copied object will be reflected in the original object and vice versa.
 
 ![Shallow Copy](img/ShallowCopy.PNG)
 
