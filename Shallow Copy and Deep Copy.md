@@ -4,14 +4,14 @@
 In object-oriented programming, object copying is creating a copy of an existing object. The result object is called object copy or simply copy. There are two main copy methods: Shallow Copy and Deep Copy.
 
 ## Value type and Reference type
-A value-type variable contains an instance of the type. In C# value types include
+A value-type variable contains an instance of the type. In C# value types include:
 - simple types: bool, byte, char, decimal, double, float, int, long, sbyte, short, uint, ulong, ushort
-- enum types
+- enum type
 - structure type
 - nullable value type
 
 When passing a value-type variable from one method to another, the system will create a separate copy of the variable in another method. If the value of the variable got changed in one method, it won't affect the value in another method.
-* Example 1:
+* Example 1: variable ```i``` remains unchanged even after we pass it to the ```DoubleTheValue()``` method and double its value.
 ```C#
 public class Solution
 {
@@ -30,7 +30,7 @@ public class Solution
     }
 }
 ```
-* Example 2:
+* Example 2: structure ```C``` remains unchanged even after we pass it to ```RedefineLanuage()``` method and change its fields' values.
 ```C#
 public class Solution
 {
@@ -58,19 +58,50 @@ public class Solution
         Solution sol = new Solution();
         Language C = new Language("C", false);
         Language CPlusPlus = sol.RedefineLanguage(C, "C++", true);
-
-        Console.WriteLine(string.Format("{0},{1}", C.name, C.IsOOP));
-        Console.WriteLine(string.Format("{0},{1}", CPlusPlus.name, CPlusPlus.IsOOP));
+        Console.WriteLine(string.Format("{0},{1}", C.name, C.IsOOP)); // C,false
     }
 }
 ```
 
-Unlike the value-type variables, a reference-type variable doesn't store the values directly. Instead, it stores an address where the value is stored. In other words, a reference-type variable contains a pointer to another memory location that holds the data. In C#, reference types include
+Unlike the value-type variables, a reference-type variable doesn't store the values directly. Instead, it stores an address where the value is stored. In other words, a reference-type variable contains a pointer to another memory location that holds the data. In C#, reference types include:
 - String
 - Array (even if its element are value types)
 - Class
 - Delegate
 
+When passing a reference-type variable from one method to another, the system doesn't create a copy. Instead, the system passes the varaible's memory address. Hence, if the value got changed in one method, it will be reflected in another method.
+* Example: If we define ```Language``` as a Class instead of a Structure, values of varaible ```C```'s field's will be changed.
+```C#
+public class Solution
+{
+    public class Language
+    {
+        public string name;
+        public bool IsOOP;
+
+        public Language(string n, bool oop)
+        {
+            name = n;
+            IsOOP = oop;
+        }
+    }
+
+    public Language RedefineLanguage(Language language, string n, bool oop)
+    {
+        language.name = n;
+        language.IsOOP = oop;
+        return language;
+    }
+ 
+    public static void Main(string[] args)
+    {
+        Solution sol = new Solution();
+        Language C = new Language("C", false);
+        Language CPlusPlus = sol.RedefineLanguage(C, "C++", true);
+        Console.WriteLine(string.Format("{0},{1}", C.name, C.IsOOP)); // C++,true      
+    }
+}
+```
 ## Shallow Copy
 Shallow copy is a field by field copy. If the field is value type, then shallow copy copies the value. If the field is reference type, then shallow copy copies the reference instead of copying the object that the reference points to. So the original object and copied object are not 100% disjoint, which means any changes made to the copied object will be reflected in the original object and vice versa.
 
