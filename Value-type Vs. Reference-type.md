@@ -2,29 +2,21 @@
 Introduction
 
 ## Value-type Variable Vs. Reference-type Variable
-
-### Value-type Variable
-A value-type variable contains an instance of the type. In C# value types include:
+A value-type variable contains an instance of the type. It is store in the Stack and requires only a single segment of memory. In C# value types include:
 - simple/primitive type: bool, byte, char, decimal, double, float, int, long, sbyte, short, uint, ulong, ushort
 - enum type
 - structure type
 - nullable value type
 
-Value-type variable requires only a single segment of memory, which stores the actual data. Value-Type variable is stored in the stack.
 
-
-### Reference-type Variable
-Unlike the value-type variables, a reference-type variable doesn't store the values directly. Instead, it stores an address where the value is stored. In other words, a reference-type variable contains a pointer to another memory location (a.k.a, Heap) that holds the data. In C#, reference types include:
+Unlike the value-type variables, a reference-type variable doesn't store the values directly. Instead, it stores an address where the value is stored. Reference-type variable requires two segments of memory. The actual data is stored in the Heap while the reference is stored in the Stack. In C#, reference types include:
 - String
 - Array (even if its element are value types)
 - Class
 - Delegate
 
-Reference-type variable has two segments of memory. The actual data is stored in the Heap while the refence is stored in the stack.
-
 
 ## Passing Variables
-
 When passing a reference-type variable from one method to another, the system doesn't create a copy. Instead, the system passes the varaible's memory address. Hence, if the value got changed in one method, it will be reflected in another method.
 
 When passing a value-type variable from one method to another, the system will create a separate copy of the variable in another method. If the value of the variable got changed in one method, it won't affect the value in another method.
