@@ -29,11 +29,8 @@ When passing a reference-type variable from one method to another, the system do
 
 When passing a value-type variable from one method to another, the system will create a separate copy of the variable in another method. If the value of the variable got changed in one method, it won't affect the value in another method.
 
-## Passing Value-type Variable
-
-* Passing Value-type Variable by Value
-
-* Example 1: variable ```i``` remains unchanged even after we pass it to the ```DoubleTheValue()``` method and double its value.
+### Passing Value-type Variable by Value
+variable ```i``` remains unchanged even after we pass it to the ```DoubleTheValue()``` method and double its value.
 ```C#
 public class Solution
 {
@@ -51,38 +48,8 @@ public class Solution
 }
 ```
 
-* Example 2: structure ```C``` remains unchanged even after we pass it to ```RedefineLanuage()``` method and change its value.
-```C#
-public class Solution
-{
-    public struct Language
-    {
-        public string name;
-
-        public Language(string n)
-        {
-            name = n;
-        }
-    }
-
-    public Language RedefineLanguage(Language language, string n)
-    {
-        language.name = n;
-        return language;
-    }
-
-    public static void Main(string[] args)
-    {
-        Solution sol = new Solution();
-        Language C = new Language("C");
-        Language CPlusPlus = sol.RedefineLanguage(C, "C++");
-        Console.WriteLine(C.name); // C
-    }
-}
-```
-
-* Passing Value-type Variable by Reference
-* Example 1: 
+###  Passing Value-type Variable by Reference
+variable ```i``` is changed from 2 to 4 after we pass it to the ```DoubleTheValue()``` method since we pass the reference of ```i```.
 ```C#
 public class Solution
 {
@@ -99,40 +66,8 @@ public class Solution
     }
 }
 ```
-* Example 2: 
-```C#
-public class Solution
-{
-    public struct Language
-    {
-        public string name;
 
-        public Language(string n)
-        {
-            name = n;
-        }
-    }
-
-    public Language RedefineLanguage(ref Language language, string n)
-    {
-        language.name = n;
-        return language;
-    }
-
-    public static void Main(string[] args)
-    {
-        Solution sol = new Solution();
-        Language C = new Language("C");
-        Language CPlusPlus = sol.RedefineLanguage(ref C, "C++");
-        Console.WriteLine(C.name); // C++
-    }
-}
-```
-
-
-## Passing Reference-type Variable
-
-* Passing Reference-type Variable by Value 
+### Passing Reference-type Variable by Value 
 ```C#
 public class Solution
 {
@@ -155,9 +90,7 @@ public class Solution
 }
 ```
 
-* Passing Reference-type Variable by Reference
-
-
+### Passing Reference-type Variable by Reference
 ```C#
 public class Solution
 {
