@@ -1,16 +1,16 @@
-## Variable Vs. Type
-A variable can be thought of a memory location that holds values of a specific type. The value in a variable may change during the life of the program, hence the memory location is called "variable". Each variable has a specific type, which indicates which type of data the variable may hold. For example, a varaible that holds an integer so it is called integer variable.
+## Variable and Type
+A variable can be thought of a memory location that holds values of a specific type. The value in a variable may change during the life of the program, hence the memory location is called "variable". Each variable has a specific type that indicates which type of value the variable holds. For example, a variable that holds an integer value is called integer variable.
 
 
 ## Value Type Vs. Reference Type
-A value type holds the value within its own memory location. It requires only a single segment of memory and is stored in the Stack. In C# value types include:
+A value-type variable holds the value within its own memory location. It requires a single segment of memory in the Stack. In C# value types include:
 - simple/primitive type: bool, byte, char, decimal, double, float, int, long, sbyte, short, uint, ulong, ushort
 - enum type
 - structure type
 - nullable value type
 
 
-Unlike value type, reference type doesn't hold value directly. Instead, it stores an address (called reference) where the data is stored. Reference type requires two segments of memory. The actual data is stored in the Heap, while the reference is stored in the Stack. In C#, reference types include:
+Unlike value-type variable, reference-type variable doesn't hold value directly. Instead, it stores a reference points to another memory segment where the data is stored. Reference-type variable has two segments of memory. The actual data is stored in the Heap, while the reference is stored in the Stack. In C#, reference types include:
 - String
 - Array (even if its element are value types)
 - Class
@@ -20,7 +20,7 @@ Unlike value type, reference type doesn't hold value directly. Instead, it store
 ## Passing Variable
 In general, when passing a value-type variable from one method to another, the system will create a copy of the variable in the calling method and pass it to the called method. If the value of the variable got changed in the called method, it won't affect the value in the calling method, and vice versa. 
 
-When passing a reference-type variable from one method to another, the system doesn't create a copy. Instead, the system passes the varaible's memory address (a.k.a., reference) from the calling method to the called method. Hence, if the value got changed in one method, it will be reflected in another method.
+When passing a reference-type variable from one method to another, the system doesn't create a copy. Instead, the system passes the variable's memory address (a.k.a., reference) from the calling method to the called method. Hence, if the value got changed in one method, it will be reflected in another method.
 
 
 ### Passing Value Type by Value
@@ -132,7 +132,7 @@ public class Solution
 }
 ```
 
-In order to keep the change persit in both calling method and called method, we need to pass the ```string``` type variable by reference.
+In order to keep the change persist in both calling method and called method, we need to pass the ```string``` type variable by reference.
 ```C#
 public class Solution
 {
