@@ -16,6 +16,7 @@ Unlike value-type variable, reference-type variable doesn't hold value directly.
 - Class
 - Delegate
 
+![](https://github.com/idanhuang/Learning_Note/blob/main/img/value_type_and_reference_type.PNG)
 
 ## Passing Variable
 In general, when passing a value-type variable from one method to another, the system will create a copy of the variable in the calling method and pass it to the called method. If the value of the variable got changed in the called method, it won't affect the value in the calling method, and vice versa. 
@@ -111,8 +112,8 @@ public class Solution
 }
 ```
 
-## Immutable reference type
-Immutable reference like ```string``` behaves like regular refernce type except it doesn't provide a way to change its value. In the following example, when passing ```string``` type variable ```str``` to ```ChangeString()```, even the value of ```str``` is changed inside ```ChangeString()```, the change doesn't affect the calling method. 
+## Passing Immuable Reference Type
+Immutable references like ```string``` behave like regular refernce type except it doesn't provide a way to change its value when passing it by value. In the following example, when passing ```string``` type variable ```str``` to ```ChangeString()```, even the value of ```str``` is changed inside ```ChangeString()```, the change doesn't affect the calling method. 
 ```C#
 public class Solution
 {
